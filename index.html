@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Xuan Viet Duc | Data Engineer Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading Portfolio</div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1 class="animate-title">Nguyen Xuan Viet Duc</h1>
+            <p class="animate-subtitle">Data Engineer Intern</p>
+            <nav>
+                <ul>
+                    <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#projects" class="nav-link"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#certificates" class="nav-link"><i class="fas fa-certificate"></i> Certificates</a></li>
+                    <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="particles" id="particles-js"></div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container" data-aos="fade-up">
+                <h2>About Me</h2>
+                
+                <div class="about-content">
+                    <div class="profile-image" data-aos="fade-right">
+                        <img src="img/image1.jpg" alt="Nguyen Xuan Viet Duc">
+                        <div class="profile-overlay"></div>
+                    </div>
+                    
+                    <div class="about-text" data-aos="fade-left">
+                        <p>Hello! I'm Nguyen Xuan Viet Duc, a 21-year-old third-year student at the University of Science VNU-HCMC, pursuing a Bachelor's degree in Data Science. I have a passion for science, and after being introduced to data, I developed a strong interest in logical thinking and system programming. Combining these interests, I chose to pursue the path of becoming a data engineer in the future.</p>
+                        <p>I'm currently studying at the University of Science VNU-HCMC with a major in Data Science. I have a strong interest in data-related systems, and I'm eager to further expand my knowledge in the field of data, especially in big data.</p>
+                        <p><strong>Expected Graduation:</strong> 2026 | <strong>GPA:</strong> 3.63/4.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 data-aos="fade-up">Projects</h2>
+                
+                <div class="project" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="project-content">
+                        <h3>IncidentMapper-USA: Traffic Incident Analysis System</h3>
+                        <p><strong>Timeline:</strong> Apr 2025 - Present | <strong>Role:</strong> Data Engineer, Data Analyst | <strong>Team Size:</strong> 1 member</p>
+                        <p><strong>Objective:</strong> Build an end-to-end pipeline for analyzing US traffic incident data.</p>
+                        <ul>
+                            <li>Implemented distributed data lake using HDFS in Docker containers for raw traffic incident data storage</li>
+                            <li>Implemented MapReduce processing to clean and transform large-scale incident data, handling complex GeoJSON structures</li>
+                            <li>Designed PostgreSQL database schema optimized for spatial data querying and analytical processing</li>
+                            <li>Created interactive dashboards and geographic heatmaps using Apache Superset to visualize incident patterns and hotspots</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> Successfully built a scalable data processing system capable of handling hundreds of thousands of daily traffic incidents while providing actionable geographic insights.</p>
+                        <a href="https://github.com/VietDucFCB/IncidentMapper-USA" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-icon"><i class="fas fa-car"></i></div>
+                    <div class="project-content">
+                        <h3>CarInsight: End-to-End Data Engineering for Used Cars</h3>
+                        <p><strong>Timeline:</strong> Mar 2025 – Present | <strong>Role:</strong> Data Engineer | <strong>Team Size:</strong> 1</p>
+                        <p><strong>Objective:</strong> Develop an end-to-end data engineering pipeline for processing and analyzing used car data at scale.</p>
+                        <ul>
+                            <li>Scraped multi-attribute used car data (brand, year, engine capacity, etc.), stored raw JSON, and built pipelines to ingest data into a centralized data lake</li>
+                            <li>Engineered automated ETL processes to clean, transform, and load data, leveraging Hadoop and Spark for distributed processing and HDFS partitioning for optimal scalability</li>
+                            <li>Containerized pipeline components with Docker and orchestrated complex workflows via Apache Airflow, integrating Kafka for real-time event streaming and process triggering</li>
+                            <li>Developed robust databases supporting an AI-driven car recommendation system and price prediction model, complemented by automated email notifications for pipeline events</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> The system successfully processes and analyzes large-scale car data, enabling real-time insights and predictions.</p>
+                        <a href="https://github.com/VietDucFCB/CarInsight-End-to-End-Data-Engineering-for-Used-Cars" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-icon"><i class="fas fa-home"></i></div>
+                    <div class="project-content">
+                        <h3>House Price Prediction</h3>
+                        <p><strong>Timeline:</strong> July 2024 – Aug 2024 | <strong>Role:</strong> Team Leader | <strong>Team Size:</strong> 4</p>
+                        <p><strong>Objective:</strong> Develop a predictive model to estimate house prices based on collected features.</p>
+                        <ul>
+                            <li>Scraped real estate data from various sources</li>
+                            <li>Extracted key features using Large Language Models (LLMs) via Anyscale API</li>
+                            <li>Cleaned and preprocessed the entire dataset to ensure data integrity</li>
+                            <li>Conducted EDA and visualized key features for insights</li>
+                            <li>Compiled a comprehensive report detailing the data collection, preprocessing, and feature analysis process</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> The predictive models achieved relatively stable results, though some external factors influenced overall accuracy.</p>
+                        <a href="https://github.com/VietDucFCB/House_Price_Prediction" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-icon"><i class="fas fa-brain"></i></div>
+                    <div class="project-content">
+                        <h3>EEG-Based Mental Attention State Classification</h3>
+                        <p><strong>Timeline:</strong> Nov 2024 – Dec 2024 | <strong>Role:</strong> Team Member | <strong>Team Size:</strong> 4</p>
+                        <p><strong>Objective:</strong> Classify three mental attention states—focused, unfocused, and drowsy—using EEG signal data.</p>
+                        <ul>
+                            <li>Processed raw EEG data and transformed it into a structured format suitable for SVM and KNN models</li>
+                            <li>Developed a simple neural network architecture to simulate the SVM model</li>
+                            <li>Performed hyperparameter tuning and model optimization to achieve the best classification performance</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> The models achieved an accuracy of up to 86.7%.</p>
+                        <a href="https://github.com/VietDucFCB/PatternRecognition" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
+                    <div class="project-content">
+                        <h3>Real-Time Legal Chatbot Development</h3>
+                        <p><strong>Timeline:</strong> Jan 2025 – Feb 2025 | <strong>Role:</strong> Team Leader | <strong>Team Size:</strong> 3</p>
+                        <p><strong>Objective:</strong> Develop a chatbot capable of providing real-time responses to legal inquiries related to a company's policies.</p>
+                        <ul>
+                            <li>Collected and scraped relevant legal data from web sources</li>
+                            <li>Utilized Gemini API for embedding and vector storage</li>
+                            <li>Designed and implemented the chatbot system to ensure accurate and efficient responses</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> The chatbot successfully provided responses to legal inquiries as required.</p>
+                        <a href="https://github.com/VietDucFCB/ChatBox" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates">
+            <div class="container">
+                <h2 data-aos="fade-up">Certificates</h2>
+                
+                <!-- TOEIC Certificate -->
+                <div class="certificate-card" data-aos="zoom-in">
+                    <div class="certificate-header">
+                        <div class="certificate-logo">
+                            <img src="https://th.bing.com/th/id/OIP.-0-yLPAvjdvS1RzehU_HAQAAAA?w=176&h=132&c=7&r=0&o=5&pid=1.7" alt="IIG Vietnam Logo">
+                        </div>
+                        <div class="certificate-issuer">
+                            <h3>TOEIC Listening and Reading</h3>
+                            <p>Issued by IIG Vietnam</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-info">
+                            <div class="info-item">
+                                <span class="info-label">Score</span>
+                                <span class="info-value">840/990</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Issue Date</span>
+                                <span class="info-value">2024</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value status-active">Active</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-actions">
+                            <a href="https://drive.google.com/file/d/1blAtILedRacecl7rs_ePZ3w8RgkOQqdL/view?usp=drive_link" target="_blank" class="view-certificate">
+                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HackerRank SQL Certificate -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="certificate-header hackerrank-header">
+                        <div class="certificate-logo">
+                            <img src="https://cdn-1.webcatalog.io/catalog/hackerrank/hackerrank-icon.png" alt="HackerRank Logo">
+                        </div>
+                        <div class="certificate-issuer">
+                            <h3>SQL (Advanced)</h3>
+                            <p>Issued by HackerRank</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-info">
+                            <div class="info-item">
+                                <span class="info-label">Credential ID</span>
+                                <span class="info-value">bf552c515e68</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Issue Date</span>
+                                <span class="info-value">2024</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Level</span>
+                                <span class="info-value">Advanced</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value status-active">Active</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-actions">
+                            <a href="https://www.hackerrank.com/certificates/bf552c515e68" target="_blank" class="view-certificate hackerrank-btn">
+                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Microsoft Learn Certificate -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="certificate-header microsoft-header">
+                        <div class="certificate-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo-2012-present.jpg" alt="Microsoft Logo">
+                        </div>
+                        <div class="certificate-issuer">
+                            <h3>Data Engineer Career Path</h3>
+                            <p>Issued by Microsoft Learn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-info">
+                            <div class="info-item">
+                                <span class="info-label">Program</span>
+                                <span class="info-value">Career Path</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Completion Date</span>
+                                <span class="info-value">April 2025</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Focus Area</span>
+                                <span class="info-value">Data Engineering</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value status-active">Completed</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-actions">
+                            <a href="https://learn.microsoft.com/en-us/plans/p3x0u1w5qm8q5y?sharingId=A6F39542CA497E25" target="_blank" class="view-certificate microsoft-btn">
+                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- IBM Coursera Certificate -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="certificate-header ibm-header">
+                        <div class="certificate-logo">
+                            <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_5015a6ccbbe12278ba4392c1c0d806be/ibm-envizi-esg-suite.png" alt="IBM Logo">
+                        </div>
+                        <div class="certificate-issuer">
+                            <h3>Python Project for Data Engineering</h3>
+                            <p>Issued by IBM via Coursera</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-details">
+                        <div class="certificate-info">
+                            <div class="info-item">
+                                <span class="info-label">Provider</span>
+                                <span class="info-value">Coursera</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Issuing Organization</span>
+                                <span class="info-value">IBM</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Date Earned</span>
+                                <span class="info-value">March 2025</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value status-active">Verified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-actions">
+                            <a href="https://coursera.org/share/963d5c4912b1a2355769334652c36481" target="_blank" class="view-certificate ibm-btn">
+                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 data-aos="fade-up">Contact</h2>
+                <div class="contact-grid" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <h3>Email</h3>
+                            <p><a href="mailto:nxvduckhtn@gmail.com">nxvduckhtn@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-info">
+                            <h3>Phone</h3>
+                            <p>(+84) 967059466</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-info">
+                            <h3>Location</h3>
+                            <p>Thu Duc, Ho Chi Minh City</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-github"></i></div>
+                        <div class="contact-info">
+                            <h3>GitHub</h3>
+                            <p><a href="https://github.com/VietDucFCB" target="_blank">VietDucFCB</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Send Me a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Nguyen Xuan Viet Duc</h3>
+                    <p>Data Engineer & Analyst</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/VietDucFCB" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:nxvduckhtn@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nguyen Xuan Viet Duc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
