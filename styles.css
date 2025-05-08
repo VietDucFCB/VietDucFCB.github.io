@@ -265,80 +265,175 @@ nav ul li a:hover::after {
 /* Project Cards */
 .project {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Softer, more modern shadow */
     margin-bottom: 3rem;
     transition: var(--transition);
     display: flex;
     overflow: hidden;
+    border: 1px solid #e9ecef; /* Subtle border */
 }
 
 .project:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
 .project-icon {
-    background: var(--gradient);
+    background: var(--gradient); /* Keeping the gradient for now, can be changed */
     color: white;
-    padding: 2rem;
+    padding: 2.5rem; /* Increased padding */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    min-width: 80px;
+    font-size: 2.2rem; /* Slightly larger icon */
+    min-width: 100px; /* Adjusted width */
+    border-right: 1px solid #dee2e6; /* Separator line */
 }
 
 .project-content {
-    padding: 2rem;
+    padding: 2rem 2.5rem; /* Adjusted padding */
     flex: 1;
 }
 
-.project h3 {
+.project h3 { /* Project Title */
     color: var(--primary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem; /* Increased margin */
+    font-size: 1.75rem; /* Larger title */
+    font-weight: 700;
+}
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem; /* Spacing between meta items */
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.project-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+}
+
+.project-meta .meta-item i {
+    color: var(--secondary); /* Icon color */
 }
 
 .project p {
     margin-bottom: 1rem;
-    color: var(--text-light);
+    color: var(--text); /* Standard text color for better readability */
+    line-height: 1.7; /* Improved line height */
+}
+
+.project p strong { /* For "Objective:" and "Outcome:" */
+    color: var(--dark);
+    font-weight: 600;
 }
 
 .project ul {
     margin: 1.5rem 0;
-    padding-left: 1.5rem;
+    padding-left: 0.5rem; /* Adjust if using icons */
+    list-style: none; /* Remove default bullets */
 }
 
 .project li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem; /* Increased spacing */
     position: relative;
-    list-style-type: none;
-    padding-left: 1rem;
+    padding-left: 1.8rem; /* Space for the icon */
+    color: var(--text);
 }
 
-.project li:before {
-    content: "•";
+.project li::before {
+    content: "\f058"; /* Corrected: Font Awesome check-circle icon (solid) */
+    font-family: "Font Awesome 6 Free"; /* Ensure correct Font Awesome family */
+    font-weight: 900; /* For solid icons */
     color: var(--secondary);
-    font-weight: bold;
     position: absolute;
-    left: -1rem;
+    left: 0;
+    top: 1px; /* Adjust vertical alignment */
+    font-size: 1rem; /* Icon size */
 }
 
 .project-link {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.7rem 1.2rem;
+    display: inline-flex; /* For better alignment of icon and text */
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem; /* Slightly larger button */
     background-color: var(--secondary);
     color: white;
-    border-radius: 4px;
+    border-radius: 6px; /* Consistent border-radius */
     font-weight: 500;
     transition: var(--transition);
+    text-decoration: none; /* Ensure no underline */
+}
+
+.project-link i {
+    font-size: 0.9rem; /* Adjust icon size in button if needed */
 }
 
 .project-link:hover {
     background-color: var(--primary);
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Dark Mode Adjustments for New Project Styles */
+body.dark-mode .project {
+    background-color: #2a2a2a;
+    border-color: #333; /* Darker border for dark mode */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .project:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .project-icon {
+    background: var(--primary); /* Or a darker shade of the gradient */
+    border-right-color: #444;
+}
+
+body.dark-mode .project h3 {
+    color: var(--secondary); /* Or a lighter shade like #e0e0e0 */
+}
+
+body.dark-mode .project-meta {
+    color: #a0a0a0; /* Lighter text for meta in dark mode */
+}
+
+body.dark-mode .project-meta .meta-item i {
+    color: var(--secondary); /* Keep icon color consistent or adjust if needed */
+}
+
+body.dark-mode .project p {
+    color: #c0c0c0; /* Lighter paragraph text */
+}
+
+body.dark-mode .project p strong {
+    color: #e0e0e0; /* Lighter strong text */
+}
+
+body.dark-mode .project li {
+    color: #c0c0c0;
+}
+
+body.dark-mode .project li::before {
+    color: var(--secondary); /* Keep icon color consistent */
+}
+
+body.dark-mode .project-link {
+    background-color: var(--secondary);
+    color: #FFFFFF;
+}
+
+body.dark-mode .project-link:hover {
+    background-color: var(--primary);
+    color: #FFFFFF;
 }
 
 /* Certificate Section */
@@ -392,8 +487,8 @@ nav ul li a:hover::after {
 /* Contact Section */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+    gap: 2.5rem; /* Increased gap */
     margin-bottom: 3rem;
 }
 
@@ -401,70 +496,90 @@ nav ul li a:hover::after {
     display: flex;
     background-color: white;
     border-radius: 8px;
-    box-shadow: var(--shadow);
+    border: 1px solid #e0e0e0; /* Softer border */
     overflow: hidden;
     transition: var(--transition);
+    box-shadow: none; /* Removed default shadow */
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    border-color: var(--secondary); /* Highlight border on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Softer hover shadow */
 }
 
 .contact-icon {
-    background: var(--gradient);
+    background: var(--secondary); /* Solid secondary color */
     color: white;
     padding: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    min-width: 60px;
+    font-size: 1.8rem; /* Slightly larger icon */
+    min-width: 70px; /* Adjusted width */
 }
 
 .contact-info {
-    padding: 1.5rem;
+    padding: 1.5rem 2rem; /* Adjusted padding */
     flex: 1;
 }
 
 .contact-info h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Slightly larger heading */
     margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.contact-info p {
+    color: var(--text-light);
+    font-size: 0.95rem;
 }
 
 /* Contact Form */
 .contact-form {
     background-color: white;
     border-radius: 8px;
-    box-shadow: var(--shadow);
-    padding: 2rem;
+    border: 1px solid #e0e0e0; /* Consistent border */
+    padding: 2.5rem; /* Increased padding */
     margin-top: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
 .contact-form h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem; /* Increased margin */
     text-align: center;
+    font-size: 1.8rem; /* Larger heading */
+    color: var(--primary);
 }
 
 .form-group {
     margin-bottom: 1.5rem;
 }
 
+.form-group label { /* Added label styling */
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 0.9rem 1.2rem; /* Adjusted padding */
+    border: 1px solid #ccc; /* Slightly darker border */
+    border-radius: 6px; /* More rounded corners */
     font-family: 'Roboto', sans-serif;
     transition: var(--transition);
+    font-size: 1rem; /* Consistent font size */
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--secondary);
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 0 3px rgba(var(--rgb-secondary, 52, 152, 219), 0.25); /* Adjusted focus shadow, ensure --rgb-secondary is defined or use direct RGB */
 }
 
 .form-group textarea {
@@ -475,18 +590,22 @@ nav ul li a:hover::after {
 .submit-btn {
     background-color: var(--secondary);
     color: white;
-    padding: 0.8rem 1.5rem;
+    padding: 0.9rem 1.8rem; /* Adjusted padding */
     border: none;
-    border-radius: 4px;
+    border-radius: 6px; /* Consistent border-radius */
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600; /* Bolder text */
     transition: var(--transition);
     width: 100%;
+    font-size: 1.05rem; /* Slightly larger font */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 0.5px; /* Added letter spacing */
 }
 
 .submit-btn:hover {
     background-color: var(--primary);
     transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Added hover shadow */
 }
 
 /* Footer */
@@ -755,14 +874,24 @@ footer {
     position: relative;
 }
 
+.certificates-grid {
+    display: flex; /* Changed from grid to flex */
+    flex-wrap: nowrap; /* Ensure items stay in a single line */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 2rem; /* Spacing between cards */
+    padding-bottom: 1rem; /* Add some padding for the scrollbar */
+}
+
 .certificate-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */ /* Removed margin-bottom */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #f0f0f0;
+    min-width: 350px; /* Set a minimum width for each card */
+    width: 350px; /* Set a fixed width for each card */
 }
 
 .certificate-card:hover {
@@ -980,4 +1109,50 @@ footer {
 .info-value.advanced {
     color: #38B44A;
     font-weight: bold;
+}
+
+/* Header Top Right Area */
+.header-top-right-area {
+    position: absolute;
+    top: 10px; /* Adjusted from 20px */
+    right: 5px; /* Adjusted from 20px */
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Spacing between social icons group and theme switch */
+    z-index: 10; /* Ensure it's above other header content if necessary */
+}
+
+/* Header Social Icons */
+.top-social-icons {
+    display: flex;
+    gap: 1rem; /* Spacing between individual social icons */
+}
+
+.top-social-icons a {
+    color: var(--light);
+    font-size: 1.5rem; /* Adjust icon size as needed */
+    transition: var(--transition);
+}
+
+.top-social-icons a:hover {
+    color: var(--secondary);
+}
+
+/* Header Social Icons */
+.top-social-icons {
+    position: absolute;
+    top: 20px;
+    right: 80px; /* Adjust this value to position icons to the left of the theme switch */
+    display: flex;
+    gap: 1rem;
+}
+
+.top-social-icons a {
+    color: var(--light);
+    font-size: 1.5rem; /* Adjust icon size as needed */
+    transition: var(--transition);
+}
+
+.top-social-icons a:hover {
+    color: var(--secondary);
 }

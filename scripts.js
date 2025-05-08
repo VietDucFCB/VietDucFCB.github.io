@@ -116,10 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
+
+            // Construct the mailto link
+            const subject = `Portfolio Contact: ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+            const mailtoLink = `mailto:nxvduckhtn@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Open the default email client
+            window.location.href = mailtoLink;
             
-            // In a real implementation, you would send this data to your server
-            // For now, show a success message
-            alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+            alert(`Thank you for your message, ${name}! Please send the prepared email.`);
             contactForm.reset();
         });
     }
