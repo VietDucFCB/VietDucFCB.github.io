@@ -3,434 +3,1056 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyen Xuan Viet Duc Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- AOS Animation Library -->
+    <title>Nguyen Xuan Viet Duc - Data Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        /* Certificate styles */
+        #certificates h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1e293b; /* var(--dark) */
+        }
+
+        /* Slider specific styles */
+        .certificates-slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1100px; /* Adjust as needed, slightly less than container for arrow space */
+            margin: 0 auto;
+            padding: 0 40px; /* Space for arrows if they are outside the overflow area */
+            box-sizing: border-box;
+        }
+
+        .certificates-slider-viewport {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .certificates-track { /* Replaces .certificates-grid for layout */
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1.5rem; /* Gap between cards */
+            transition: transform 0.5s ease-in-out;
+            padding-bottom: 1rem; /* If you want some space below cards */
+        }
+
+        .certificate-card {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            flex: 0 0 350px; /* Fixed width for each card, adjust as needed */
+            max-width: 350px; /* Ensure it doesn't exceed this */
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Arrow styles removed */
+        /* .slide-arrow { ... } */
+        /* .prev-arrow { ... } */
+        /* .next-arrow { ... } */
+
+        /* Custom Scrollbar Styles */
+        .certificates-scrollbar-wrapper {
+            width: 100%;
+            height: 10px; /* Height of the scrollbar track */
+            background-color: #e2e8f0; /* Light gray track */
+            border-radius: 5px;
+            margin-top: 1.5rem; /* Space above the scrollbar */
+            position: relative;
+            cursor: pointer; /* Indicate it's interactive */
+            overflow: hidden; /* Ensure thumb doesn't overflow visually if calculations are slightly off */
+        }
+
+        .certificates-scrollbar-thumb {
+            height: 100%;
+            background-color: var(--primary); /* Blue thumb */
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: grab; /* Indicate draggable */
+            /* Width will be set by JavaScript */
+        }
+        .certificates-scrollbar-thumb:active {
+            cursor: grabbing;
+        }
+
+        .certificate-header {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .certificate-logo {
+            margin-right: 1rem;
+        }
+
+        .certificate-logo img {
+            width: 64px; /* Increased from 50px in original for better fit if needed */
+            height: 64px; /* Increased from 50px */
+            object-fit: contain;
+        }
+
+        .certificate-issuer h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b; /* var(--dark) */
+            margin-bottom: 0.25rem;
+        }
+
+        .certificate-issuer p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .certificate-details {
+            padding: 1.5rem;
+        }
+
+        .certificate-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: #1e293b; /* var(--dark) */
+            font-weight: 500;
+        }
+
+        .blinking-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #10B981; /* Tailwind green-500, a visible green */
+            border-radius: 50%;
+            margin-right: 6px; /* Space between dot and text */
+            animation: blink-animation 1.5s infinite;
+        }
+
+        @keyframes blink-animation {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; } /* Dot fades */
+            100% { opacity: 1; }
+        }
+
+        .status-active { /* For text like "Active", "Completed" */
+            color: #059669; /* Tailwind green-600 */
+            font-weight: 600;
+            display: flex; /* Added for alignment */
+            align-items: center; /* Added for alignment */
+        }
+
+        .certificate-actions {
+            margin-top: 1rem; /* Adjusted from 1.5rem if needed */
+        }
+
+        .view-certificate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%; /* Make button full width */
+            color: #ffffff;
+            background-color: #3b82f6; /* var(--primary) */
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem; /* Tailwind rounded-md */
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .view-certificate:hover {
+            background-color: #2563eb; /* var(--primary-dark) */
+        }
+
+        .view-certificate i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Special button colors from original CSS */
+        .hackerrank-header { /* If you had specific header styles */ }
+        .hackerrank-btn {
+            background-color: #2ec866 !important; /* Use !important if Tailwind overrides */
+        }
+        .hackerrank-btn:hover {
+            background-color: #28a54c !important;
+        }
+        
+        .microsoft-header { /* If you had specific header styles */ }
+        .microsoft-btn {
+            background-color: #00a4ef !important;
+        }
+        .microsoft-btn:hover {
+            background-color: #0088cf !important;
+        }
+        
+        .ibm-header { /* If you had specific header styles */ }
+        .ibm-btn {
+            background-color: #054ada !important;
+        }
+        .ibm-btn:hover {
+            background-color: #0530ad !important;
+        }
+
+    </style>
 </head>
-<body>
-    <div id="loader">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading Portfolio</div>
-    </div>
-    <header>
-        <div class="header-top-right-area">
-            <div class="top-social-icons">
-                <a href="https://github.com/VietDucFCB" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/duc-viet-a7116724a/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.facebook.com/share/1FjA3rgDUT/" target="_blank"><i class="fab fa-facebook"></i></a>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-blue-600">VDUC</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition">About</a>
+                    <a href="#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
+                    <a href="#certificates" class="text-gray-700 hover:text-blue-600 transition">Certificates</a>
+                    <a href="https://github.com/VietDucFCB" target="_blank" class="flex items-center text-gray-700 hover:text-blue-600 transition">
+                        <i class="fab fa-github mr-2"></i> GitHub
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-toggle" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+
             </div>
         </div>
-        <div class="container">
-            <h1 class="animate-title">Nguyen Xuan Viet Duc</h1>
-            <p class="animate-subtitle">Data Engineer & Scienctist Aspirant</p>
-            <nav>
-                <ul>
-                    <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
-                    <li><a href="#projects" class="nav-link"><i class="fas fa-code"></i> Projects</a></li>
-                    <li><a href="#certificates" class="nav-link"><i class="fas fa-certificate"></i> Certificates</a></li>
-                    <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </nav>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">About</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Projects</a>
+                <a href="#certificates" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Certificates</a>
+                <a href="https://github.com/VietDucFCB" target="_blank" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md flex items-center">
+                    <i class="fab fa-github mr-2"></i> GitHub
+                </a>
+            </div>
         </div>
-        <div class="particles" id="particles-js"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Nguyen Xuan Viet Duc</h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">Data Science Student & Aspiring Data Engineer</h2>
+                    <p class="text-lg mb-8 opacity-90">Building robust and scalable data systems with a passion for solving complex data challenges.</p>
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">View Projects</a>
+                        <a href="#contact" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hidden md:block fade-in delay-200">
+                    <div class="relative w-64 h-64 mx-auto">
+                        <div class="absolute inset-0 bg-white bg-opacity-20 rounded-full animate-pulse"></div>
+                        <div class="absolute inset-4 bg-white bg-opacity-10 rounded-full animate-pulse delay-100"></div>
+                        <div class="absolute inset-8 bg-white bg-opacity-5 rounded-full animate-pulse delay-200"></div>
+                        <img src="https://vietducfcb.github.io/img/image1.jpg" alt="Nguyen Xuan Viet Duc" class="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-white shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section id="about">
-            <div class="container" data-aos="fade-up">
-                <h2>About Me</h2>
-                
-                <div class="about-content">
-                    <div class="profile-image" data-aos="fade-right">
-                        <img src="img/image1.jpg" alt="Nguyen Xuan Viet Duc">
-                        <div class="profile-overlay"></div>
-                    </div>
-                    
-                    <div class="about-text" data-aos="fade-left">
-                        <p>Hello! I’m Nguyen Xuan Viet Duc, a 21-year-old third-year student at the University of Science, VNU-HCMC, majoring in Data Science. With a deep passion for science and technology, I discovered my enthusiasm for data, logical thinking, and system programming early in my academic journey. This passion has shaped my ambition to become a data engineer, specializing in building robust and scalable data systems.</p>
-                        <p>Currently, I am focused on strengthening my expertise in data engineering and big data technologies. I am eager to apply my skills to solve complex data challenges and contribute to advancing data-driven solutions in the future.</p>
-                        <p><strong>Expected Graduation:</strong> 2026 | <strong>GPA:</strong> 3.63/4.00</p>
-                    </div>
-                </div>
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">About Me</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
             </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2 data-aos="fade-up">Projects</h2>
-                
-                <div class="project" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-icon"><i class="fas fa-map-marked-alt"></i></div>
-                    <div class="project-content">
-                        <h3>IncidentMapper-USA: Traffic Incident Analysis System</h3>
-                        <div class="project-meta">
-                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> Apr 2025 - Present</span>
-                            <span class="meta-item"><i class="fas fa-user-tie"></i> Data Engineer, Data Analyst</span>
-                            <span class="meta-item"><i class="fas fa-users"></i> 1 member</span>
-                        </div>
-                        <p><strong>Objective:</strong> Build an end-to-end pipeline for analyzing US traffic incident data.</p>
-                        <ul>
-                            <li>Implemented distributed data lake using HDFS in Docker containers for raw traffic incident data storage</li>
-                            <li>Implemented MapReduce processing to clean and transform large-scale incident data, handling complex GeoJSON structures</li>
-                            <li>Designed PostgreSQL database schema optimized for spatial data querying and analytical processing</li>
-                            <li>Created interactive dashboards and geographic heatmaps using Apache Superset to visualize incident patterns and hotspots</li>
-                        </ul>
-                        <p><strong>Outcome:</strong> Successfully built a scalable data processing system capable of handling hundreds of thousands of daily traffic incidents while providing actionable geographic insights.</p>
-                        <a href="https://github.com/VietDucFCB/IncidentMapper-USA" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-icon"><i class="fas fa-car"></i></div>
-                    <div class="project-content">
-                        <h3>CarInsight: End-to-End Data Engineering for Used Cars</h3>
-                        <div class="project-meta">
-                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> Mar 2025 – Present</span>
-                            <span class="meta-item"><i class="fas fa-user-tie"></i> Data Engineer</span>
-                            <span class="meta-item"><i class="fas fa-users"></i> 1 member</span>
-                        </div>
-                        <p><strong>Objective:</strong> Develop an end-to-end data engineering pipeline for processing and analyzing used car data at scale.</p>
-                        <ul>
-                            <li>Scraped multi-attribute used car data (brand, year, engine capacity, etc.), stored raw JSON, and built pipelines to ingest data into a centralized data lake</li>
-                            <li>Engineered automated ETL processes to clean, transform, and load data, leveraging Hadoop and Spark for distributed processing and HDFS partitioning for optimal scalability</li>
-                            <li>Containerized pipeline components with Docker and orchestrated complex workflows via Apache Airflow, integrating Kafka for real-time event streaming and process triggering</li>
-                            <li>Developed robust databases supporting an AI-driven car recommendation system and price prediction model, complemented by automated email notifications for pipeline events</li>
-                        </ul>
-                        <p><strong>Outcome:</strong> The system successfully processes and analyzes large-scale car data, enabling real-time insights and predictions.</p>
-                        <a href="https://github.com/VietDucFCB/CarInsight-End-to-End-Data-Engineering-for-Used-Cars" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-icon"><i class="fas fa-home"></i></div>
-                    <div class="project-content">
-                        <h3>House Price Prediction</h3>
-                        <div class="project-meta">
-                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> July 2024 – Aug 2024</span>
-                            <span class="meta-item"><i class="fas fa-user-tie"></i> Data Engineer / Data Scientist (Team Leader)</span>
-                            <span class="meta-item"><i class="fas fa-users"></i> 4 members</span>
-                        </div>
-                        <p><strong>Objective:</strong> Develop a predictive model to estimate house prices based on collected features.</p>
-                        <ul>
-                            <li>Scraped real estate data from various sources</li>
-                            <li>Extracted key features using Large Language Models (LLMs) via Anyscale API</li>
-                            <li>Cleaned and preprocessed the entire dataset to ensure data integrity</li>
-                            <li>Conducted EDA and visualized key features for insights</li>
-                            <li>Compiled a comprehensive report detailing the data collection, preprocessing, and feature analysis process</li>
-                        </ul>
-                        <p><strong>Outcome:</strong> The predictive models achieved relatively stable results, though some external factors influenced overall accuracy.</p>
-                        <a href="https://github.com/VietDucFCB/House_Price_Prediction" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project" data-aos="fade-up" data-aos-delay="400">
-                    <div class="project-icon"><i class="fas fa-brain"></i></div>
-                    <div class="project-content">
-                        <h3>EEG-Based Mental Attention State Classification</h3>
-                        <div class="project-meta">
-                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> Nov 2024 – Dec 2024</span>
-                            <span class="meta-item"><i class="fas fa-user-tie"></i> Data Scientist (Team Member)</span>
-                            <span class="meta-item"><i class="fas fa-users"></i> 4 members</span>
-                        </div>
-                        <p><strong>Objective:</strong> Classify three mental attention states—focused, unfocused, and drowsy—using EEG signal data.</p>
-                        <ul>
-                            <li>Processed raw EEG data and transformed it into a structured format suitable for SVM and KNN models</li>
-                            <li>Developed a simple neural network architecture to simulate the SVM model</li>
-                            <li>Performed hyperparameter tuning and model optimization to achieve the best classification performance</li>
-                        </ul>
-                        <p><strong>Outcome:</strong> The models achieved an accuracy of up to 86.7%.</p>
-                        <a href="https://github.com/VietDucFCB/PatternRecognition" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project" data-aos="fade-up" data-aos-delay="500">
-                    <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
-                    <div class="project-content">
-                        <h3>Real-Time Legal Chatbot Development</h3>
-                        <div class="project-meta">
-                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> Jan 2025 – Feb 2025</span>
-                            <span class="meta-item"><i class="fas fa-user-tie"></i> Team Leader</span>
-                            <span class="meta-item"><i class="fas fa-users"></i> 3 members</span>
-                        </div>
-                        <p><strong>Objective:</strong> Develop a chatbot capable of providing real-time responses to legal inquiries related to a company's policies.</p>
-                        <ul>
-                            <li>Collected and scraped relevant legal data from web sources</li>
-                            <li>Utilized Gemini API for embedding and vector storage</li>
-                            <li>Designed and implemented the chatbot system to ensure accurate and efficient responses</li>
-                        </ul>
-                        <p><strong>Outcome:</strong> The chatbot successfully provided responses to legal inquiries as required.</p>
-                        <a href="https://github.com/VietDucFCB/ChatBox" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certificates">
-            <div class="container">
-                <h2 data-aos="fade-up">Certificates</h2>
-                <div class="certificates-grid" data-aos="fade-up" data-aos-delay="100">
-                <!-- TOEIC Certificate -->
-                <div class="certificate-card" data-aos="zoom-in">
-                    <div class="certificate-header">
-                        <div class="certificate-logo">
-                            <img src="https://th.bing.com/th/id/OIP.-0-yLPAvjdvS1RzehU_HAQAAAA?w=176&h=132&c=7&r=0&o=5&pid=1.7" alt="IIG Vietnam Logo">
-                        </div>
-                        <div class="certificate-issuer">
-                            <h3>TOEIC Listening and Reading</h3>
-                            <p>Issued by IIG Vietnam</p>
-                        </div>
-                    </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="fade-in">
+                    <p class="text-lg text-gray-700 mb-6">
+                        Hello! I'm Nguyen Xuan Viet Duc, a 21-year-old third-year student at the University of Science, VNU-HCMC, majoring in Data Science. With a deep passion for science and technology, I discovered my enthusiasm for data, logical thinking, and system programming early in my academic journey.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8">
+                        This passion has shaped my ambition to become a data engineer, specializing in building robust and scalable data systems. Currently, I am focused on strengthening my expertise in data engineering and big data technologies. I am eager to apply my skills to solve complex data challenges and contribute to advancing data-driven solutions in the future.
+                    </p>
                     
-                    <div class="certificate-details">
-                        <div class="certificate-info">
-                            <div class="info-item">
-                                <span class="info-label">Score</span>
-                                <span class="info-value">840/990</span>
+                    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-blue-600 mr-3 text-xl"></i>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">University of Science, VNU-HCMC</h4>
+                                    <p class="text-gray-600">Data Science Major</p>
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Issue Date</span>
-                                <span class="info-value">2024</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt text-blue-600 mr-3 text-xl"></i>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Expected Graduation</h4>
+                                    <p class="text-gray-600">2026</p>
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Status</span>
-                                <span class="info-value status-active">Active</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-blue-600 mr-3 text-xl"></i>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">GPA</h4>
+                                    <p class="text-gray-600">3.63/4.00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 mr-3 text-xl"></i>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Location</h4>
+                                    <p class="text-gray-600">Ho Chi Minh City, Vietnam</p>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="certificate-actions">
-                            <a href="https://drive.google.com/file/d/1blAtILedRacecl7rs_ePZ3w8RgkOQqdL/view?usp=drive_link" target="_blank" class="view-certificate">
-                                <i class="fas fa-external-link-alt"></i> View Certificate
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">My Projects</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="space-y-8">
+                <!-- IncidentMapper-USA -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0 md:w-1/3 bg-blue-600 flex items-center justify-center p-8">
+                            <i class="fas fa-map-marked-alt text-white text-6xl"></i>
+                        </div>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">IncidentMapper-USA: Traffic Incident Analysis System</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Data Engineering</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Big Data</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">HDFS</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">MapReduce</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PostgreSQL</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">End-to-end pipeline for analyzing US traffic incident data. Implemented distributed data lake using HDFS in Docker containers and MapReduce processing to clean/transform large-scale incident data.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="far fa-calendar mr-1"></i> Apr 2025 - Present
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users mr-1"></i> Individual Project
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-tag mr-1"></i> Data Engineer, Data Analyst
+                                </div>
+                            </div>
+                            
+                            <a href="https://github.com/VietDucFCB/IncidentMapper-USA" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- HackerRank SQL Certificate -->
-                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="certificate-header hackerrank-header">
-                        <div class="certificate-logo">
-                            <img src="https://cdn-1.webcatalog.io/catalog/hackerrank/hackerrank-icon.png" alt="HackerRank Logo">
+                <!-- CarInsight -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in delay-100">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0 md:w-1/3 bg-indigo-600 flex items-center justify-center p-8">
+                            <i class="fas fa-car text-white text-6xl"></i>
                         </div>
-                        <div class="certificate-issuer">
-                            <h3>SQL (Advanced)</h3>
-                            <p>Issued by HackerRank</p>
-                        </div>
-                    </div>
-                    
-                    <div class="certificate-details">
-                        <div class="certificate-info">
-                            <div class="info-item">
-                                <span class="info-label">Credential ID</span>
-                                <span class="info-value">bf552c515e68</span>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">CarInsight: End-to-End Data Engineering for Used Cars</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Data Pipeline</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">ETL</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Hadoop/Spark</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Airflow</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Kafka</span>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Issue Date</span>
-                                <span class="info-value">2024</span>
+                            <p class="text-gray-700 mb-4">Developed an end-to-end data engineering pipeline for processing and analyzing used car data at scale with automated ETL processes leveraging Hadoop and Spark, orchestrated via Apache Airflow.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="far fa-calendar mr-1"></i> Mar 2025 – Present
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users mr-1"></i> Individual Project
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-tag mr-1"></i> Data Engineer
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Level</span>
-                                <span class="info-value">Advanced</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Status</span>
-                                <span class="info-value status-active">Active</span>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-actions">
-                            <a href="https://www.hackerrank.com/certificates/bf552c515e68" target="_blank" class="view-certificate hackerrank-btn">
-                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            
+                            <a href="https://github.com/VietDucFCB/CarInsight-End-to-End-Data-Engineering-for-Used-Cars" target="_blank" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Microsoft Learn Certificate -->
-                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="certificate-header microsoft-header">
-                        <div class="certificate-logo">
-                            <img src="https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo-2012-present.jpg" alt="Microsoft Logo">
+                <!-- House Price Prediction -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in delay-200">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0 md:w-1/3 bg-emerald-600 flex items-center justify-center p-8">
+                            <i class="fas fa-home text-white text-6xl"></i>
                         </div>
-                        <div class="certificate-issuer">
-                            <h3>Data Engineer Career Path</h3>
-                            <p>Issued by Microsoft Learn</p>
-                        </div>
-                    </div>
-                    
-                    <div class="certificate-details">
-                        <div class="certificate-info">
-                            <div class="info-item">
-                                <span class="info-label">Program</span>
-                                <span class="info-value">Career Path</span>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">House Price Prediction</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">Data Science</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">LLMs</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">Feature Extraction</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">EDA</span>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Completion Date</span>
-                                <span class="info-value">April 2025</span>
+                            <p class="text-gray-700 mb-4">Developed a predictive model to estimate house prices based on collected features, extracting key features using LLMs via Anyscale API and conducting comprehensive EDA and visualization.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="far fa-calendar mr-1"></i> July 2024 – Aug 2024
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users mr-1"></i> Team of 4
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-tag mr-1"></i> Team Leader
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Focus Area</span>
-                                <span class="info-value">Data Engineering</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Status</span>
-                                <span class="info-value status-active">Completed</span>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-actions">
-                            <a href="https://learn.microsoft.com/en-us/plans/p3x0u1w5qm8q5y?sharingId=A6F39542CA497E25" target="_blank" class="view-certificate microsoft-btn">
-                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            
+                            <a href="https://github.com/VietDucFCB/House_Price_Prediction" target="_blank" class="inline-flex items-center text-emerald-600 hover:text-emerald-800">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- IBM Coursera Certificate -->
-                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="certificate-header ibm-header">
-                        <div class="certificate-logo">
-                            <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_5015a6ccbbe12278ba4392c1c0d806be/ibm-envizi-esg-suite.png" alt="IBM Logo">
+                <!-- EEG Classification -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in delay-300">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0 md:w-1/3 bg-purple-600 flex items-center justify-center p-8">
+                            <i class="fas fa-brain text-white text-6xl"></i>
                         </div>
-                        <div class="certificate-issuer">
-                            <h3>Python Project for Data Engineering</h3>
-                            <p>Issued by IBM via Coursera</p>
-                        </div>
-                    </div>
-                    
-                    <div class="certificate-details">
-                        <div class="certificate-info">
-                            <div class="info-item">
-                                <span class="info-label">Provider</span>
-                                <span class="info-value">Coursera</span>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">EEG-Based Mental Attention State Classification</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Signal Processing</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">SVM/KNN</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Neural Networks</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Pattern Recognition</span>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Issuing Organization</span>
-                                <span class="info-value">IBM</span>
+                            <p class="text-gray-700 mb-4">Classified three mental attention states—focused, unfocused, and drowsy—using EEG signal data, processing raw EEG data and developing models that achieved 86.7% accuracy.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="far fa-calendar mr-1"></i> Nov 2024 – Dec 2024
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users mr-1"></i> Team of 4
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-tag mr-1"></i> Data Scientist
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <span class="info-label">Date Earned</span>
-                                <span class="info-value">March 2025</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Status</span>
-                                <span class="info-value status-active">Verified</span>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-actions">
-                            <a href="https://coursera.org/share/963d5c4912b1a2355769334652c36481" target="_blank" class="view-certificate ibm-btn">
-                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            
+                            <a href="https://github.com/VietDucFCB/PatternRecognition" target="_blank" class="inline-flex items-center text-purple-600 hover:text-purple-800">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Legal Chatbot -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in delay-300"> <!-- Adjusted delay -->
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0 md:w-1/3 bg-amber-600 flex items-center justify-center p-8">
+                            <i class="fas fa-robot text-white text-6xl"></i> <!-- Changed icon to fa-robot -->
+                        </div>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Real-Time Legal Chatbot Development</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">NLP</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">LLMs</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">Chatbot</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">Legal Tech</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">Developed a chatbot capable of providing real-time responses to legal inquiries related to a company's policies using Gemini API for embedding and vector storage.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="far fa-calendar mr-1"></i> Jan 2025 – Feb 2025
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-users mr-1"></i> Team of 3
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-tag mr-1"></i> Team Leader
+                                </div>
+                            </div>
+                            
+                            <a href="https://github.com/VietDucFCB/ChatBox" target="_blank" class="inline-flex items-center text-amber-600 hover:text-amber-800">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact">
-            <div class="container">
-                <h2 data-aos="fade-up">Contact</h2>
-                <div class="contact-grid" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="contact-info">
-                            <h3>Email</h3>
-                            <p><a href="mailto:nxvduckhtn@gmail.com">nxvduckhtn@gmail.com</a></p>
+    <!-- Certificates Section (from original index.html) -->
+    <section id="certificates">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">Certificates</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto mb-12"></div>
+
+            <div class="certificates-slider-wrapper">
+                <!-- Arrows removed -->
+                <div class="certificates-slider-viewport">
+                    <div class="certificates-track">
+                        <!-- TOEIC Certificate -->
+                        <div class="certificate-card" data-aos="zoom-in">
+                            <div class="certificate-header">
+                                <div class="certificate-logo">
+                                    <img src="https://th.bing.com/th/id/OIP.-0-yLPAvjdvS1RzehU_HAQAAAA?w=176&h=132&c=7&r=0&o=5&pid=1.7" alt="IIG Vietnam Logo">
+                                </div>
+                                <div class="certificate-issuer">
+                                    <h3>TOEIC Listening and Reading</h3>
+                                    <p>Issued by IIG Vietnam</p>
+                                </div>
+                            </div>
+                            <div class="certificate-details">
+                                <div class="certificate-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Score</span>
+                                        <span class="info-value">840/990</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Issue Date</span>
+                                        <span class="info-value">2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Status</span>
+                                        <span class="info-value status-active">
+                                            <span class="blinking-dot"></span>Active
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-actions">
+                                    <a href="https://drive.google.com/file/d/1blAtILedRacecl7rs_ePZ3w8RgkOQqdL/view?usp=drive_link" target="_blank" class="view-certificate">
+                                        <i class="fas fa-external-link-alt"></i> View Certificate
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div class="contact-info">
-                            <h3>Phone</h3>
-                            <p>(+84) 967059466</p>
+            
+                        <!-- HackerRank SQL Certificate -->
+                        <div class="certificate-card" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="certificate-header hackerrank-header">
+                                <div class="certificate-logo">
+                                    <img src="https://cdn-1.webcatalog.io/catalog/hackerrank/hackerrank-icon.png" alt="HackerRank Logo">
+                                </div>
+                                <div class="certificate-issuer">
+                                    <h3>SQL (Advanced)</h3>
+                                    <p>Issued by HackerRank</p>
+                                </div>
+                            </div>
+                            <div class="certificate-details">
+                                <div class="certificate-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Credential ID</span>
+                                        <span class="info-value">bf552c515e68</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Issue Date</span>
+                                        <span class="info-value">2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Level</span>
+                                        <span class="info-value">Advanced</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Status</span>
+                                        <span class="info-value status-active">
+                                            <span class="blinking-dot"></span>Active
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-actions">
+                                    <a href="https://www.hackerrank.com/certificates/bf552c515e68" target="_blank" class="view-certificate hackerrank-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Certificate
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-info">
-                            <h3>Location</h3>
-                            <p>Thu Duc, Ho Chi Minh City</p>
+            
+                        <!-- Microsoft Learn Certificate -->
+                        <div class="certificate-card" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="certificate-header microsoft-header">
+                                <div class="certificate-logo">
+                                    <img src="https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo-2012-present.jpg" alt="Microsoft Logo">
+                                </div>
+                                <div class="certificate-issuer">
+                                    <h3>Data Engineer Career Path</h3>
+                                    <p>Issued by Microsoft Learn</p>
+                                </div>
+                            </div>
+                            <div class="certificate-details">
+                                <div class="certificate-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Program</span>
+                                        <span class="info-value">Career Path</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Completion Date</span>
+                                        <span class="info-value">April 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Focus Area</span>
+                                        <span class="info-value">Data Engineering</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Status</span>
+                                        <span class="info-value status-active">
+                                            <span class="blinking-dot"></span>Completed
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-actions">
+                                    <a href="https://learn.microsoft.com/en-us/plans/p3x0u1w5qm8q5y?sharingId=A6F39542CA497E25" target="_blank" class="view-certificate microsoft-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Certificate
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-github"></i></div>
-                        <div class="contact-info">
-                            <h3>GitHub</h3>
-                            <p><a href="https://github.com/VietDucFCB" target="_blank">VietDucFCB</a></p>
+            
+                        <!-- IBM Coursera Certificate -->
+                        <div class="certificate-card" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="certificate-header ibm-header">
+                                <div class="certificate-logo">
+                                    <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_5015a6ccbbe12278ba4392c1c0d806be/ibm-envizi-esg-suite.png" alt="IBM Logo">
+                                </div>
+                                <div class="certificate-issuer">
+                                    <h3>Python Project for Data Engineering</h3>
+                                    <p>Issued by IBM via Coursera</p>
+                                </div>
+                            </div>
+                            <div class="certificate-details">
+                                <div class="certificate-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Provider</span>
+                                        <span class="info-value">Coursera</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Issuing Organization</span>
+                                        <span class="info-value">IBM</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Date Earned</span>
+                                        <span class="info-value">March 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Status</span>
+                                        <span class="info-value status-active">
+                                            <span class="blinking-dot"></span>Verified
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-actions">
+                                    <a href="https://coursera.org/share/963d5c4912b1a2355769334652c36481" target="_blank" class="view-certificate ibm-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Certificate
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-                        <div class="contact-info">
-                            <h3>LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/duc-viet-a7116724a/" target="_blank">Duc Viet</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-facebook"></i></div>
-                        <div class="contact-info">
-                            <h3>Facebook</h3>
-                            <p><a href="https://www.facebook.com/share/1FjA3rgDUT/" target="_blank">Việt Đức</a></p>
-                        </div>
+                        <!-- Add more certificate cards here if needed -->
                     </div>
                 </div>
+                <!-- Scrollbar HTML -->
+                <div class="certificates-scrollbar-wrapper">
+                    <div class="certificates-scrollbar-thumb"></div>
+                </div>
+                <!-- Arrows removed -->
+            </div>
+        </div>
+    </section>
 
-                <div class="contact-form" data-aos="fade-up" data-aos-delay="400">
-                    <h3>Send Me a Message</h3>
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white"> <!-- Changed bg-gray-50 to bg-white for consistency with other sections -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Get In Touch</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl shadow-md p-8 fade-in"> <!-- Changed bg-white to bg-gray-50 for contrast -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Email</h4>
+                                    <a href="mailto:nxvduckhtn@gmail.com" class="text-gray-600 hover:text-blue-600">nxvduckhtn@gmail.com</a>
+                                </div>
+                            </div>
+                             <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Phone</h4>
+                                    <p class="text-gray-600">(+84) 967059466</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fab fa-linkedin text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">LinkedIn</h4>
+                                    <a href="https://www.linkedin.com/in/duc-viet-a7116724a/" target="_blank" class="text-gray-600 hover:text-blue-600">linkedin.com/in/duc-viet-a7116724a</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fab fa-github text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">GitHub</h4>
+                                    <a href="https://github.com/VietDucFCB" target="_blank" class="text-gray-600 hover:text-blue-600">github.com/VietDucFCB</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Location</h4>
+                                    <p class="text-gray-600">Thu Duc, Ho Chi Minh City</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Follow Me</h3>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/duc-viet-a7116724a/" target="_blank" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-100 transition">
+                                    <i class="fab fa-linkedin-in text-gray-700 hover:text-blue-600"></i>
+                                </a>
+                                <a href="https://github.com/VietDucFCB" target="_blank" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-100 transition">
+                                    <i class="fab fa-github text-gray-700 hover:text-blue-600"></i>
+                                </a>
+                                <a href="https://www.facebook.com/share/1FjA3rgDUT/" target="_blank" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-100 transition">
+                                    <i class="fab fa-facebook-f text-gray-700 hover:text-blue-600"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Send Me a Message</h3>
+                        <form id="contact-form-new">
+                            <div class="mb-4">
+                                <label for="name-new" class="block text-gray-700 mb-2">Name</label>
+                                <input type="text" id="name-new" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email-new" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email-new" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message-new" class="block text-gray-700 mb-2">Message</label>
+                                <textarea id="message-new" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Send Message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>Nguyen Xuan Viet Duc</h3>
-                    <p>Data Engineer & Scienctist Aspirant</p>
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm opacity-80">© 2025 Nguyen Xuan Viet Duc. All rights reserved.</p>
                 </div>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#certificates">Certificates</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="https://github.com/VietDucFCB" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/duc-viet-a7116724a/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.facebook.com/share/1FjA3rgDUT/" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="mailto:nxvduckhtn@gmail.com"><i class="fas fa-envelope"></i></a>
+                <div class="flex space-x-6">
+                    <a href="#about" class="text-sm opacity-80 hover:opacity-100 transition">About</a>
+                    <a href="#projects" class="text-sm opacity-80 hover:opacity-100 transition">Projects</a>
+                    <a href="#certificates" class="text-sm opacity-80 hover:opacity-100 transition">Certificates</a>
+                    <a href="#contact" class="text-sm opacity-80 hover:opacity-100 transition">Contact</a>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Nguyen Xuan Viet Duc. All rights reserved.</p>
+            <div class="text-center mt-6">
+                <p class="text-xs opacity-60">Built with passion for data engineering and technology</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> <!-- Moved AOS script link here -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open and it's a link within the page
+                if (this.getAttribute('href').startsWith('#')) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // Initialize AOS animation library
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 600, // Animation duration
+            offset: 120, // Offset (in px) from the original trigger point
+            once: true    // Whether animation should happen only once - while scrolling down
+        });
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="scripts.js"></script>
+        // Certificate Slider Logic with Custom Scrollbar
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.certificates-track');
+            const sliderViewport = document.querySelector('.certificates-slider-viewport');
+            const scrollbarWrapper = document.querySelector('.certificates-scrollbar-wrapper');
+            const scrollbarThumb = document.querySelector('.certificates-scrollbar-thumb');
+
+            if (!track || !sliderViewport || !scrollbarWrapper || !scrollbarThumb) {
+                console.warn('Certificate slider or scrollbar elements not found. Slider will not initialize.');
+                if(scrollbarWrapper) scrollbarWrapper.style.display = 'none'; // Hide scrollbar if elements missing
+                return;
+            }
+
+            const cards = Array.from(track.children);
+            if (cards.length === 0) {
+                scrollbarWrapper.style.display = 'none';
+                return;
+            }
+
+            let cardWidth = 0;
+            let gap = 0;
+            let totalTrackWidth = 0;
+            let viewportWidth = 0;
+            let currentTrackTranslateX = 0;
+            let maxScrollableTrackWidth = 0;
+            
+            let isDraggingThumb = false;
+            let dragStartX = 0;
+            let initialThumbLeft = 0;
+
+            function calculateDimensions() {
+                if (cards.length > 0) {
+                    cardWidth = cards[0].offsetWidth;
+                    gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+                    totalTrackWidth = cards.reduce((acc, card) => acc + card.offsetWidth, 0) + (cards.length - 1) * gap;
+                }
+                viewportWidth = sliderViewport.offsetWidth;
+                maxScrollableTrackWidth = Math.max(0, totalTrackWidth - viewportWidth);
+
+                if (totalTrackWidth <= viewportWidth) {
+                    scrollbarWrapper.style.display = 'none';
+                } else {
+                    scrollbarWrapper.style.display = 'block';
+                }
+            }
+
+            function updateVisuals() {
+                calculateDimensions(); // Ensure dimensions are up-to-date
+
+                // Clamp track translation
+                currentTrackTranslateX = Math.max(-maxScrollableTrackWidth, Math.min(0, currentTrackTranslateX));
+                track.style.transform = `translateX(${currentTrackTranslateX}px)`;
+
+                if (totalTrackWidth > viewportWidth) {
+                    const scrollbarWrapperWidth = scrollbarWrapper.offsetWidth;
+                    const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarWrapperWidth); // Min thumb width 20px
+                    scrollbarThumb.style.width = `${thumbWidth}px`;
+                    
+                    const thumbMaxTranslateX = scrollbarWrapperWidth - thumbWidth;
+                    let thumbTranslateX = 0;
+                    if (maxScrollableTrackWidth > 0) { // Avoid division by zero
+                        thumbTranslateX = (-currentTrackTranslateX / maxScrollableTrackWidth) * thumbMaxTranslateX;
+                    }
+                    scrollbarThumb.style.transform = `translateX(${Math.min(thumbMaxTranslateX, Math.max(0, thumbTranslateX))}px)`;
+                }
+            }
+            
+            scrollbarThumb.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Prevent text selection
+                isDraggingThumb = true;
+                dragStartX = e.clientX;
+                // Get thumb's current translateX directly
+                const currentThumbTransform = window.getComputedStyle(scrollbarThumb).transform;
+                if (currentThumbTransform && currentThumbTransform !== 'none') {
+                    const matrix = new DOMMatrix(currentThumbTransform);
+                    initialThumbLeft = matrix.e;
+                } else {
+                    initialThumbLeft = 0;
+                }
+                scrollbarThumb.style.cursor = 'grabbing';
+                document.body.style.cursor = 'grabbing'; // Optional: change body cursor
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDraggingThumb) return;
+                const deltaX = e.clientX - dragStartX;
+                const scrollbarWrapperWidth = scrollbarWrapper.offsetWidth;
+                const thumbWidth = scrollbarThumb.offsetWidth;
+                const thumbMaxTranslateX = scrollbarWrapperWidth - thumbWidth;
+
+                let newThumbLeft = initialThumbLeft + deltaX;
+                newThumbLeft = Math.max(0, Math.min(newThumbLeft, thumbMaxTranslateX)); // Clamp
+
+                if (maxScrollableTrackWidth > 0) { // Avoid division by zero
+                    currentTrackTranslateX = -(newThumbLeft / thumbMaxTranslateX) * maxScrollableTrackWidth;
+                } else {
+                    currentTrackTranslateX = 0;
+                }
+                updateVisuals();
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDraggingThumb) {
+                    isDraggingThumb = false;
+                    scrollbarThumb.style.cursor = 'grab';
+                    document.body.style.cursor = ''; // Reset body cursor
+                }
+            });
+
+            scrollbarWrapper.addEventListener('click', (e) => {
+                if (e.target === scrollbarThumb) return; // Click was on the thumb itself
+
+                const scrollbarWrapperWidth = scrollbarWrapper.offsetWidth;
+                const thumbWidth = scrollbarThumb.offsetWidth;
+                const clickX = e.clientX - scrollbarWrapper.getBoundingClientRect().left;
+                
+                // Calculate desired center of thumb to be at clickX
+                let newThumbLeft = clickX - thumbWidth / 2;
+                const thumbMaxTranslateX = scrollbarWrapperWidth - thumbWidth;
+                newThumbLeft = Math.max(0, Math.min(newThumbLeft, thumbMaxTranslateX));
+
+                if (maxScrollableTrackWidth > 0) {
+                     currentTrackTranslateX = -(newThumbLeft / thumbMaxTranslateX) * maxScrollableTrackWidth;
+                } else {
+                    currentTrackTranslateX = 0;
+                }
+                updateVisuals();
+            });
+            
+            // Mouse wheel scrolling on the viewport
+            sliderViewport.addEventListener('wheel', (e) => {
+                if (totalTrackWidth <= viewportWidth) return; // No scroll needed
+                e.preventDefault();
+                
+                // Adjust sensitivity as needed
+                const scrollAmount = e.deltaY > 0 ? 100 : -100; // Pixels to scroll track by
+                currentTrackTranslateX += scrollAmount;
+                updateVisuals();
+            });
+
+
+            window.addEventListener('resize', updateVisuals);
+
+            // Initial setup
+            updateVisuals(); 
+        });
+    </script>
+    <!-- Removed redundant AOS script link from here, it's above the main script block now -->
 </body>
 </html>
