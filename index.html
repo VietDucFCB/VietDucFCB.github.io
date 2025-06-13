@@ -70,9 +70,8 @@
         .certificates-slider-wrapper {
             position: relative;
             width: 100%;
-            max-width: 1100px; /* Adjust as needed, slightly less than container for arrow space */
+            max-width: 1100px; /* Adjust as needed */
             margin: 0 auto;
-            padding: 0 40px; /* Space for arrows if they are outside the overflow area */
             box-sizing: border-box;
         }
 
@@ -577,10 +576,12 @@
     </section>
 
     <!-- Certificates Section (from original index.html) -->
-    <section id="certificates">
-        <div class="container" data-aos="fade-up">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">Certificates</h2>
-            <div class="w-20 h-1 bg-blue-600 mx-auto mb-12"></div>
+    <section id="certificates" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Certificates</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
 
             <div class="certificates-slider-wrapper">
                 <!-- Arrows removed -->
